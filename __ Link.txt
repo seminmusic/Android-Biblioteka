@@ -1,1 +1,2 @@
 https://www.androidhive.info/2015/05/android-swipe-down-to-refresh-listview-tutorial/
+https://javapapers.com/android/beautiful-android-login-screen-design-tutorial/
