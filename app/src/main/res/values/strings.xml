@@ -1,3 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <string name="app_name">List Test</string>
+    <!-- General strings: -->
+    <string name="app_name">Caffe Biblioteka</string>
+
+    <!-- Strings related to Login Activity: -->
+    <string name="login_title">CAFFE BIBLIOTEKA</string>
+    <string name="login_placeholder_username">Korisničko ime</string>
+    <string name="login_placeholder_password">Lozinka</string>
+    <string name="login_button_text">PRIJAVA</string>
+    <string name="login_developer">Developed by Sema</string>
 </resources>
