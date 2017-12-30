@@ -11,7 +11,12 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            // buildConfigField("String", "API_BASE_URL", "\"http://www.sema.ba/api/\"")
+        }
         release {
+            // buildConfigField("String", "API_BASE_URL", "\"\"")
+            //
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

@@ -1,12 +1,16 @@
 package ba.sema.listtest;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 
+/**
+ * Handles the initialization of the App, contains static method reusable for entire App
+ */
 public class App extends Application
 {
     public static final String TAG = App.class.getSimpleName();
@@ -20,9 +24,14 @@ public class App extends Application
         appInstance = this;
     }
 
-    public static synchronized App getInstance()
+    public static App getInstance()
     {
         return appInstance;
+    }
+
+    public static Context getContext()
+    {
+        return appInstance.getApplicationContext();
     }
 
     public RequestQueue getRequestQueue()

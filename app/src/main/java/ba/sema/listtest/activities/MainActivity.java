@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         swipeRefreshLayout.setRefreshing(true);
 
         String datum = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        String baseUrl = PropertiesHelper.getProperty("api.tv.url.base", getApplicationContext());
+        String baseUrl = PropertiesHelper.getPropertyValue("api.tv.url.base");  // String baseUrl = BuildConfig.API_BASE_URL;
         String url = baseUrl + "?startDate=" + datum + "&endDate=" + datum;
 
         // Volley's json object request
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
                 // headers.put("Content-Type", "application/json; charset=UTF-8");
-                headers.put("Authorization", PropertiesHelper.getProperty("api.tv.authorization", getApplicationContext()));
+                headers.put("Authorization", PropertiesHelper.getPropertyValue("api.tv.authorization"));
                 return headers;
             }
         };
