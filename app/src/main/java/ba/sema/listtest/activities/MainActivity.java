@@ -24,6 +24,7 @@ import java.util.Map;
 
 import ba.sema.listtest.App;
 import ba.sema.listtest.R;
+import ba.sema.listtest.SharedPreferencesManager;
 import ba.sema.listtest.helpers.EmisijeHelper;
 import ba.sema.listtest.helpers.PropertiesHelper;
 import ba.sema.listtest.helpers.SwipeListAdapter;
@@ -33,6 +34,7 @@ import ba.sema.listtest.models.Emisija;
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener
 {
     private String TAG = MainActivity.class.getSimpleName();
+    private SharedPreferencesManager sharedPreferencesManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listViewEmisije;
     private SwipeListAdapter adapter;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedPreferencesManager = new SharedPreferencesManager(getApplicationContext());
 
         listViewEmisije = (ListView) findViewById(R.id.lista_emisija);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.main_swipe_refresh_layout);
@@ -119,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
                 // headers.put("Content-Type", "application/json; charset=UTF-8");
-                headers.put("Authorization", PropertiesHelper.getPropertyValue("api.tv.authorization"));
+                headers.put("Authorization", "Basic " + sharedPreferencesManager.getLoginData().get(SharedPreferencesManager.KEY_USER_BASE64_AUTH));
                 return headers;
             }
         };

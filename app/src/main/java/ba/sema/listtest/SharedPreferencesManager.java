@@ -15,7 +15,7 @@ public class SharedPreferencesManager
     private static final int PREF_MODE = MODE_PRIVATE;
 
     private static final String KEY_USER_LOGGED_IN = "user_logged_in";
-    private static final String KEY_USER_BASE64_AUTH = "user_base64_auth";
+    public static final String KEY_USER_BASE64_AUTH = "user_base64_auth";
 
     private SharedPreferences sharedPreferences;
     private Editor editor;
