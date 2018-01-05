@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import ba.sema.listtest.SharedPreferencesManager;
+
 
 public class StartupActivity extends AppCompatActivity
 {
+    private SharedPreferencesManager sharedPreferencesManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -14,7 +18,10 @@ public class StartupActivity extends AppCompatActivity
 
         Intent activityIntent;
 
-        boolean userLoggedIn = false;  // Provjeriti Shared Preferences
+        // Provjera da li je korisnik već prijavljen:
+        sharedPreferencesManager = new SharedPreferencesManager(getApplicationContext());
+        boolean userLoggedIn = sharedPreferencesManager.userLoggedIn();
+
         if (userLoggedIn)
         {
             activityIntent = new Intent(this, MainActivity.class);
