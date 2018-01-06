@@ -19,6 +19,7 @@ public class EmisijeHelper
             broadcasts = response.getJSONArray("broadcasts");
             if (broadcasts.length() > 0)
             {
+                listaEmisija.clear();
                 for (int i = 0; i < broadcasts.length(); i++)
                 {
                     JSONObject b = broadcasts.getJSONObject(i);
