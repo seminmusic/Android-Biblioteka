@@ -1,10 +1,10 @@
-package ba.sema.listtest.helpers;
+package ba.sema.biblioteka.helpers;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-import ba.sema.listtest.App;
+import ba.sema.biblioteka.App;
 
 
 public class PropertiesHelper

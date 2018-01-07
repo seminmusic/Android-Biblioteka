@@ -1,4 +1,4 @@
-package ba.sema.listtest.activities;
+package ba.sema.biblioteka.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -26,11 +26,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import ba.sema.listtest.App;
-import ba.sema.listtest.R;
-import ba.sema.listtest.SharedPreferencesManager;
-import ba.sema.listtest.helpers.Base64Helper;
-import ba.sema.listtest.helpers.PropertiesHelper;
+import ba.sema.biblioteka.App;
+import ba.sema.biblioteka.R;
+import ba.sema.biblioteka.storage.SharedPreferencesManager;
+import ba.sema.biblioteka.helpers.Base64Helper;
+import ba.sema.biblioteka.helpers.PropertiesHelper;
 
 
 public class LoginActivity extends AppCompatActivity

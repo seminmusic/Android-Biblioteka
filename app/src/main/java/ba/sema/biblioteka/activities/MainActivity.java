@@ -1,4 +1,4 @@
-package ba.sema.listtest.activities;
+package ba.sema.biblioteka.activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,18 +29,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ba.sema.listtest.App;
-import ba.sema.listtest.R;
-import ba.sema.listtest.SharedPreferencesManager;
-import ba.sema.listtest.DatePickerFragment;
-import ba.sema.listtest.helpers.DateHelper;
-import ba.sema.listtest.helpers.EmisijeHelper;
-import ba.sema.listtest.helpers.PropertiesHelper;
-import ba.sema.listtest.SwipeListAdapter;
-import ba.sema.listtest.models.Emisija;
+import ba.sema.biblioteka.App;
+import ba.sema.biblioteka.R;
+import ba.sema.biblioteka.storage.SharedPreferencesManager;
+import ba.sema.biblioteka.fragments.DatePickerFragment;
+import ba.sema.biblioteka.helpers.DateHelper;
+import ba.sema.biblioteka.helpers.EmisijeHelper;
+import ba.sema.biblioteka.helpers.PropertiesHelper;
+import ba.sema.biblioteka.adapters.SwipeListAdapter;
+import ba.sema.biblioteka.models.Emisija;
 
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, DatePickerFragment.OnDateSetListener
 {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final SimpleDateFormat enDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private SwipeListAdapter adapter;
     private List<Emisija> listaEmisija;
     private Toolbar toolbar;
-    private DialogFragment fragment;
+    private DialogFragment datePicker;
     private Date datum;
 
     @Override
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         swipeRefreshLayout.setOnRefreshListener(this);
 
+        datePicker = new DatePickerFragment();
         datum = new Date();  // Trenutni datum
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -181,14 +183,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private void showDatePickerDialog()
     {
-        if (fragment == null)
-        {
-            fragment = new DatePickerFragment();
-        }
-        fragment.show(getSupportFragmentManager(), "datePicker");
+        datePicker.show(getSupportFragmentManager(), "datePicker");
     }
 
-    public void onDateSet(int year, int month, int day)
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int day)
     {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);

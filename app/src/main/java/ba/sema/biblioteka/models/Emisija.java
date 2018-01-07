@@ -1,4 +1,4 @@
-package ba.sema.listtest.models;
+package ba.sema.biblioteka.models;
 
 
 public class Emisija

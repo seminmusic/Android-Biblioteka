@@ -1,4 +1,4 @@
-package ba.sema.listtest.helpers;
+package ba.sema.biblioteka.helpers;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import ba.sema.listtest.models.Emisija;
+import ba.sema.biblioteka.models.Emisija;
 
 
 public class EmisijeHelper

@@ -1,10 +1,10 @@
-package ba.sema.listtest.activities;
+package ba.sema.biblioteka.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import ba.sema.listtest.SharedPreferencesManager;
+import ba.sema.biblioteka.storage.SharedPreferencesManager;
 
 
 public class StartupActivity extends AppCompatActivity

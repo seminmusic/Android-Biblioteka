@@ -1,4 +1,4 @@
-package ba.sema.listtest;
+package ba.sema.biblioteka;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

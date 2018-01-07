@@ -1,4 +1,4 @@
-package ba.sema.listtest;
+package ba.sema.biblioteka.adapters;
 
 
 import android.app.Activity;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ba.sema.listtest.R;
-import ba.sema.listtest.models.Emisija;
+import ba.sema.biblioteka.R;
+import ba.sema.biblioteka.models.Emisija;
 
 
 public class SwipeListAdapter extends BaseAdapter
