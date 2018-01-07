@@ -1,4 +1,4 @@
-package ba.sema.listtest.helpers;
+package ba.sema.listtest;
 
 
 import android.app.Activity;

@@ -21,7 +21,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,18 +31,20 @@ import java.util.Map;
 import ba.sema.listtest.App;
 import ba.sema.listtest.R;
 import ba.sema.listtest.SharedPreferencesManager;
-import ba.sema.listtest.helpers.DatePickerFragment;
+import ba.sema.listtest.DatePickerFragment;
+import ba.sema.listtest.helpers.DateHelper;
 import ba.sema.listtest.helpers.EmisijeHelper;
 import ba.sema.listtest.helpers.PropertiesHelper;
-import ba.sema.listtest.helpers.SwipeListAdapter;
+import ba.sema.listtest.SwipeListAdapter;
 import ba.sema.listtest.models.Emisija;
 
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener
 {
-    private static final SimpleDateFormat datumFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final SimpleDateFormat enDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final SimpleDateFormat bsDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
-    private String TAG = MainActivity.class.getSimpleName();
     private SharedPreferencesManager sharedPreferencesManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listViewEmisije;
@@ -70,13 +71,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         swipeRefreshLayout.setOnRefreshListener(this);
 
+        datum = new Date();  // Trenutni datum
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Pregled artikala");
+        toolbar.setTitle(DateHelper.nazivDanaSaDatumom(datum, bsDateFormat));
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);  // Placing toolbar in place of ActionBar
         getSupportActionBar().setIcon(R.mipmap.ic_biblioteka);
-
-        datum = new Date();  // Trenutni datum
 
         /**
          * Showing Swipe Refresh animation on activity create
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         // Showing refresh animation before making http call
         swipeRefreshLayout.setRefreshing(true);
 
-        String datumString = datumFormat.format(datum);
+        String datumString = enDateFormat.format(datum);
         String baseUrl = PropertiesHelper.getPropertyValue("api.tv.url.base");  // String baseUrl = BuildConfig.API_BASE_URL;
         String url = baseUrl + "?startDate=" + datumString + "&endDate=" + datumString;
 
@@ -180,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private void showDatePickerDialog()
     {
-        if(fragment == null)
+        if (fragment == null)
         {
             fragment = new DatePickerFragment();
         }
@@ -195,7 +196,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         calendar.set(Calendar.DATE, day);
 
         datum = calendar.getTime();
-        Toast.makeText(getApplicationContext(), "Izabrani datum: " + new SimpleDateFormat("dd.MM.yyyy").format(datum), Toast.LENGTH_LONG).show();
+        toolbar.setTitle(DateHelper.nazivDanaSaDatumom(datum, bsDateFormat));
+        Toast.makeText(getApplicationContext(), "Izabrani datum: " + bsDateFormat.format(datum), Toast.LENGTH_LONG).show();
         dohvatiPodatke();
     }
 }

@@ -7,12 +7,12 @@ import java.io.UnsupportedEncodingException;
 
 public class Base64Helper
 {
-    public static String encodeToString(String string)
+    public static String encodeToString(String input)
     {
         String encoded = null;
         try
         {
-            encoded = Base64.encodeToString(string.getBytes("UTF-8"), Base64.DEFAULT);
+            encoded = Base64.encodeToString(input.getBytes("UTF-8"), Base64.DEFAULT);
         }
         catch (UnsupportedEncodingException e)
         {

@@ -35,7 +35,8 @@ import ba.sema.listtest.helpers.PropertiesHelper;
 
 public class LoginActivity extends AppCompatActivity
 {
-    private String TAG = LoginActivity.class.getSimpleName();
+    private static final String TAG = LoginActivity.class.getSimpleName();
+
     private EditText inputUsername;
     private EditText inputPassword;
     private Button btnLogin;

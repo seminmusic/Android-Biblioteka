@@ -2,10 +2,10 @@
 
 <resources>
     <!-- General strings: -->
-    <string name="app_name">Caffe Biblioteka</string>
+    <string name="app_name">Caffe Biblioteka</string>  <!-- BHT1 Program -->
 
     <!-- Strings related to Login Activity: -->
-    <string name="login_title">CAFFE BIBLIOTEKA</string>
+    <string name="login_title">CAFFE BIBLIOTEKA</string>  <!-- BHT1 PROGRAM -->
     <string name="login_placeholder_username">Korisničko ime</string>
     <string name="login_placeholder_password">Lozinka</string>
     <string name="login_button_text">PRIJAVA</string>
