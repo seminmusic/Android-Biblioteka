@@ -31,6 +31,8 @@ import java.util.Map;
 
 import ba.sema.biblioteka.App;
 import ba.sema.biblioteka.R;
+import ba.sema.biblioteka.helpers.StavkeHelper;
+import ba.sema.biblioteka.models.Stavka;
 import ba.sema.biblioteka.storage.SharedPreferencesManager;
 import ba.sema.biblioteka.fragments.DatePickerFragment;
 import ba.sema.biblioteka.helpers.DateHelper;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private ListView listViewEmisije;
     private SwipeListAdapter adapter;
     private List<Emisija> listaEmisija;
+    private List<Stavka> listaStavki;
     private Toolbar toolbar;
     private DialogFragment datePicker;
     private Date datum;
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.main_swipe_refresh_layout);
 
         listaEmisija = new ArrayList<>();
+        listaStavki = StavkeHelper.loadAndMapTestData();
         adapter = new SwipeListAdapter(this, listaEmisija);
         listViewEmisije.setAdapter(adapter);
 
