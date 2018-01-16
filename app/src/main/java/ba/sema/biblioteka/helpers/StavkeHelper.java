@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ba.sema.biblioteka.models.Stavka;
@@ -55,5 +56,17 @@ public class StavkeHelper
         }
 
         return lista;
+    }
+
+    public static void filterTestDataByDate(List<Stavka> sveStavke, List<Stavka> filtrirani, Date datum)
+    {
+        filtrirani.clear();
+        for (Stavka s : sveStavke)
+        {
+            if (enDateFormat.format(s.Datum).equals(enDateFormat.format(datum)))
+            {
+                filtrirani.add(s);
+            }
+        }
     }
 }

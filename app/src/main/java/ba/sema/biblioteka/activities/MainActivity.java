@@ -52,8 +52,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listViewEmisije;
     private SwipeListAdapter adapter;
-    private List<Emisija> listaEmisija;
-    private List<Stavka> listaStavki;
+
+    // private List<Emisija> listaEmisija;
+    private static List<Stavka> sveStavke = StavkeHelper.loadAndMapTestData();
+    private List<Stavka> filtriraneStavke;  // Ove su za prikaz
+
     private Toolbar toolbar;
     private DialogFragment datePicker;
     private Date datum;
@@ -66,18 +69,20 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         sharedPreferencesManager = new SharedPreferencesManager(getApplicationContext());
 
+        datum = new Date();  // Trenutni datum
+
         listViewEmisije = (ListView) findViewById(R.id.lista_emisija);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.main_swipe_refresh_layout);
 
-        listaEmisija = new ArrayList<>();
-        listaStavki = StavkeHelper.loadAndMapTestData();
-        adapter = new SwipeListAdapter(this, listaEmisija);
+        // listaEmisija = new ArrayList<>();
+        filtriraneStavke = new ArrayList<>();
+        StavkeHelper.filterTestDataByDate(sveStavke, filtriraneStavke, datum);
+        adapter = new SwipeListAdapter(this, filtriraneStavke);
         listViewEmisije.setAdapter(adapter);
 
         swipeRefreshLayout.setOnRefreshListener(this);
 
         datePicker = new DatePickerFragment();
-        datum = new Date();  // Trenutni datum
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(DateHelper.nazivDanaSaDatumom(datum, bsDateFormat));
@@ -141,6 +146,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         // Showing refresh animation before making http call
         swipeRefreshLayout.setRefreshing(true);
 
+        /*
+
         String datumString = enDateFormat.format(datum);
         String baseUrl = PropertiesHelper.getPropertyValue("api.tv.url.base");  // String baseUrl = BuildConfig.API_BASE_URL;
         String url = baseUrl + "?startDate=" + datumString + "&endDate=" + datumString;
@@ -183,6 +190,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         // Adding request to request queue
         App.getInstance().addToRequestQueue(request);
+
+        */
+
+        StavkeHelper.filterTestDataByDate(sveStavke, filtriraneStavke, datum);
+        adapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void showDatePickerDialog()

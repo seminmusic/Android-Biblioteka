@@ -12,7 +12,7 @@ public class Base64Helper
         String encoded = null;
         try
         {
-            encoded = Base64.encodeToString(input.getBytes("UTF-8"), Base64.DEFAULT);
+            encoded = Base64.encodeToString(input.getBytes("UTF-8"), Base64.NO_WRAP);
         }
         catch (UnsupportedEncodingException e)
         {

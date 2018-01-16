@@ -2,3 +2,4 @@ https://www.androidhive.info/2015/05/android-swipe-down-to-refresh-listview-tuto
 https://javapapers.com/android/beautiful-android-login-screen-design-tutorial/
 https://android.jlelse.eu/login-and-main-activity-flow-a52b930f8351
 https://www.simplifiedcoding.net/android-toolbar-example/
+http://newinandroid.blogspot.ba/2014/06/single-listrow-layout-xml-example.html
