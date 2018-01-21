@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private Toolbar toolbar;
     private DialogFragment datePicker;
-    private Date datum;
+    private Calendar izabraniDatumCalendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -70,12 +70,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         if (savedInstanceState != null && savedInstanceState.containsKey(KEY_DATUM))
         {
-            datum = (Date) savedInstanceState.getSerializable(KEY_DATUM);
+            izabraniDatumCalendar = (Calendar) savedInstanceState.getSerializable(KEY_DATUM);
         }
         else
         {
-            datum = new Date();  // Trenutni datum
+            izabraniDatumCalendar = Calendar.getInstance();  // Trenutni datum
         }
+        datePicker = new DatePickerFragment(izabraniDatumCalendar);
 
         sharedPreferencesManager = new SharedPreferencesManager(getApplicationContext());
 
@@ -84,16 +85,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         // listaEmisija = new ArrayList<>();
         filtriraneStavke = new ArrayList<>();
-        StavkeHelper.filterTestDataByDate(sveStavke, filtriraneStavke, datum);
+        StavkeHelper.filterTestDataByDate(sveStavke, filtriraneStavke, izabraniDatumCalendar.getTime());
         adapter = new SwipeListAdapter(this, filtriraneStavke);
         listViewEmisije.setAdapter(adapter);
 
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        datePicker = new DatePickerFragment();
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(DateHelper.nazivDanaSaDatumom(datum, bsDateFormat));
+        toolbar.setTitle(DateHelper.nazivDanaSaDatumom(izabraniDatumCalendar.getTime(), bsDateFormat));
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);  // Placing toolbar in place of ActionBar
         getSupportActionBar().setIcon(R.mipmap.ic_biblioteka);
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public void onSaveInstanceState(Bundle savedInstanceState)
     {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putSerializable(KEY_DATUM, datum);
+        savedInstanceState.putSerializable(KEY_DATUM, izabraniDatumCalendar);
     }
 
     @Override
@@ -208,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         */
 
-        StavkeHelper.filterTestDataByDate(sveStavke, filtriraneStavke, datum);
+        StavkeHelper.filterTestDataByDate(sveStavke, filtriraneStavke, izabraniDatumCalendar.getTime());
         adapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
     }
@@ -221,14 +220,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day)
     {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DATE, day);
+        izabraniDatumCalendar.set(Calendar.YEAR, year);
+        izabraniDatumCalendar.set(Calendar.MONTH, month);
+        izabraniDatumCalendar.set(Calendar.DATE, day);
 
-        datum = calendar.getTime();
-        toolbar.setTitle(DateHelper.nazivDanaSaDatumom(datum, bsDateFormat));
-        Toast.makeText(getApplicationContext(), "Izabrani datum: " + bsDateFormat.format(datum), Toast.LENGTH_LONG).show();
+        toolbar.setTitle(DateHelper.nazivDanaSaDatumom(izabraniDatumCalendar.getTime(), bsDateFormat));
+        Toast.makeText(getApplicationContext(), "Izabrani datum: " + bsDateFormat.format(izabraniDatumCalendar.getTime()), Toast.LENGTH_LONG).show();
         dohvatiPodatke();
     }
 }

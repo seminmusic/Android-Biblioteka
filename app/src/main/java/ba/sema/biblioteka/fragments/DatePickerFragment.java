@@ -10,8 +10,9 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 
 
-// Za prevenciju resetovanja selektovanog datuma na pickeru kad se promijeni orijentacija:
+// Za prevenciju resetovanja selektovanog datuma na pickeru kad se promijeni orijentacija može se koristiti i ovo:
 // https://stackoverflow.com/questions/24473252/saving-activity-state-on-screen-orientation-change
+// Ovdje je postavljen konstruktor sa Calendar parametrom koji se setuje u activity.
 
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
@@ -22,11 +23,13 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     public DatePickerFragment()
     {
-        // Use the current date as the default date in the picker:
-        Calendar calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
+
+    }
+    public DatePickerFragment(Calendar datum)
+    {
+        this.year = datum.get(Calendar.YEAR);
+        this.month = datum.get(Calendar.MONTH);
+        this.day = datum.get(Calendar.DAY_OF_MONTH);
     }
 
     /**
