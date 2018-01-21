@@ -10,6 +10,10 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 
 
+// Za prevenciju resetovanja selektovanog datuma na pickeru kad se promijeni orijentacija:
+// https://stackoverflow.com/questions/24473252/saving-activity-state-on-screen-orientation-change
+
+
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
 {
     private OnDateSetListener callbackListener;
