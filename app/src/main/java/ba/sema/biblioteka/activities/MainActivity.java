@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final SimpleDateFormat enDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static final SimpleDateFormat bsDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private static final String KEY_DATUM = "Datum";
 
     private SharedPreferencesManager sharedPreferencesManager;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -67,9 +68,16 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sharedPreferencesManager = new SharedPreferencesManager(getApplicationContext());
+        if (savedInstanceState != null && savedInstanceState.containsKey(KEY_DATUM))
+        {
+            datum = (Date) savedInstanceState.getSerializable(KEY_DATUM);
+        }
+        else
+        {
+            datum = new Date();  // Trenutni datum
+        }
 
-        datum = new Date();  // Trenutni datum
+        sharedPreferencesManager = new SharedPreferencesManager(getApplicationContext());
 
         listViewEmisije = (ListView) findViewById(R.id.lista_emisija);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.main_swipe_refresh_layout);
@@ -102,6 +110,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     dohvatiPodatke();
                 }
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState)
+    {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putSerializable(KEY_DATUM, datum);
     }
 
     @Override
